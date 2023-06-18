@@ -2,7 +2,7 @@ import ExpenseDate from "./ExpenseDate";
 import Card from "../UI/Card";
 import "./ExpenseItem.css";
 
-function ExpenseItem({ expenses }) {
+const ExpenseItem = ({ expenses }) => {
   return (
     <Card className="expense-item">
       <ExpenseDate date={expenses.date} />
@@ -12,6 +12,6 @@ function ExpenseItem({ expenses }) {
       </div>
     </Card>
   );
-}
+};
 
 export default ExpenseItem;
