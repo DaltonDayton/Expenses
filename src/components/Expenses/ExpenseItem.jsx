@@ -3,6 +3,10 @@ import Card from "../UI/Card";
 import "./ExpenseItem.css";
 
 const ExpenseItem = ({ expenses }) => {
+  const clickHandler = () => {
+    console.log("Clicked!!!");
+  };
+
   return (
     <Card className="expense-item">
       <ExpenseDate date={expenses.date} />
@@ -10,6 +14,7 @@ const ExpenseItem = ({ expenses }) => {
         <h2>{expenses.title}</h2>
         <div className="expense-item__price">${expenses.amount.toFixed(2)}</div>
       </div>
+      <button onClick={clickHandler}>Change Title</button>
     </Card>
   );
 };
