@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./ExpenseForm.css";
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
@@ -12,18 +12,18 @@ const ExpenseForm = () => {
   //   enteredDate: "",
   // });
 
-  const titleChangeHandler = (event) => {
-    setEnteredTitle(event.target.value);
-    // setUserInput({
-    //   ...userInput,
-    //   enteredTitle: event.target.value,
-    // });
+  // const titleChangeHandler = (event) => {
+  //   // setEnteredTitle(event.target.value);
+  //   // setUserInput({
+  //   //   ...userInput,
+  //   //   enteredTitle: event.target.value,
+  //   // });
 
-    // When relying on previous state, use this syntax:
-    // setUserInput((prevState) => {
-    //   return { ...prevState, enteredTitle: event.target.value };
-    // });
-  };
+  //   // When relying on previous state, use this syntax:
+  //   // setUserInput((prevState) => {
+  //   //   return { ...prevState, enteredTitle: event.target.value };
+  //   // });
+  // };
 
   const amountChangeHandler = (event) => {
     setEnteredAmount(event.target.value);
@@ -66,7 +66,7 @@ const ExpenseForm = () => {
       date: new Date(enteredDate),
     };
 
-    console.log(expenseData);
+    props.onSaveExpenseData(expenseData);
 
     // Clear the form after submitting
     setEnteredTitle("");
