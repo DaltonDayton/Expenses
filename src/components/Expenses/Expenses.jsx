@@ -4,7 +4,7 @@ import Card from "../UI/Card";
 import ExpenseItem from "./ExpenseItem";
 import "./Expenses.css";
 
-const ExpenseItemList = (props) => {
+const Expenses = (props) => {
   const [filteredYear, setFilteredYear] = useState(2020);
 
   const filterChangeHandler = (selectedYear) => {
@@ -17,12 +17,11 @@ const ExpenseItemList = (props) => {
         selected={filteredYear}
         onChangeFilter={filterChangeHandler}
       />
-      <ExpenseItem expenses={props.expenses[0]} />
-      <ExpenseItem expenses={props.expenses[1]} />
-      <ExpenseItem expenses={props.expenses[2]} />
-      <ExpenseItem expenses={props.expenses[3]} />
+      {props.items.map((expense) => (
+        <ExpenseItem expenses={expense} />
+      ))}
     </Card>
   );
 };
 
-export default ExpenseItemList;
+export default Expenses;
