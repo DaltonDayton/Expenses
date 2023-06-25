@@ -6,9 +6,16 @@ import "./Expenses.css";
 
 const Expenses = (props) => {
   const [filteredYear, setFilteredYear] = useState(2020);
+  const [filteredExpenses, setFilteredExpenses] = useState(props.items);
 
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
+    setFilteredExpenses(props.items);
+    setFilteredExpenses((filteredExpenses) => {
+      return filteredExpenses.filter(
+        (expense) => expense.date.getFullYear().toString() === selectedYear
+      );
+    });
   };
 
   return (
@@ -17,7 +24,7 @@ const Expenses = (props) => {
         selected={filteredYear}
         onChangeFilter={filterChangeHandler}
       />
-      {props.items.map((expense) => (
+      {filteredExpenses.map((expense) => (
         <ExpenseItem key={expense.id} expenses={expense} />
       ))}
     </Card>
