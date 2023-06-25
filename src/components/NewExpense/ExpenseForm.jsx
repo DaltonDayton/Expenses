@@ -6,39 +6,14 @@ const ExpenseForm = (props) => {
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
 
-  // const [userInput, setUserInput] = useState({
-  //   enteredTitle: "",
-  //   enteredAmount: "",
-  //   enteredDate: "",
-  // });
-
-  // const titleChangeHandler = (event) => {
-  //   // setEnteredTitle(event.target.value);
-  //   // setUserInput({
-  //   //   ...userInput,
-  //   //   enteredTitle: event.target.value,
-  //   // });
-
-  //   // When relying on previous state, use this syntax:
-  //   // setUserInput((prevState) => {
-  //   //   return { ...prevState, enteredTitle: event.target.value };
-  //   // });
-  // };
+  const [minimized, setMinimized] = useState(true);
 
   const amountChangeHandler = (event) => {
     setEnteredAmount(event.target.value);
-    // setUserInput({
-    //   ...userInput,
-    //   enteredAmount: event.target.value,
-    // });
   };
 
   const dateChangeHandler = (event) => {
     setEnteredDate(event.target.value);
-    // setUserInput({
-    //   ...userInput,
-    //   enteredDate: event.target.value,
-    // });
   };
 
   const inputChangeHandler = (identifier, value) => {
@@ -72,39 +47,56 @@ const ExpenseForm = (props) => {
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
+
+    toggleMinimized();
   };
+
+  function toggleMinimized() {
+    setMinimized(!minimized);
+  }
 
   return (
     <form onSubmit={submitHandler}>
-      <div className="new-expense__controls">
-        <div className="new-expense__control">
-          <label>Title</label>
-          <input
-            type="text"
-            value={enteredTitle}
-            onChange={(event) => {
-              inputChangeHandler("title", event.target.value);
-            }}
-          />
+      {minimized ? (
+        <button onClick={toggleMinimized}>Add Expense</button>
+      ) : (
+        <div>
+          <div className="new-expense__controls">
+            <div className="new-expense__control">
+              <label>Title</label>
+              <input
+                type="text"
+                value={enteredTitle}
+                onChange={(event) => {
+                  inputChangeHandler("title", event.target.value);
+                }}
+              />
+            </div>
+            <div className="new-expense__control">
+              <label>Amount</label>
+              <input
+                type="number"
+                value={enteredAmount}
+                onChange={amountChangeHandler}
+                min="0.01"
+                step="0.01"
+              />
+            </div>
+            <div className="new-expense__control">
+              <label>Date</label>
+              <input
+                type="date"
+                value={enteredDate}
+                onChange={dateChangeHandler}
+              />
+            </div>
+          </div>
+          <div className="new-expense__actions">
+            <button onClick={toggleMinimized}>Cancel</button>
+            <button type="submit">Add Expense</button>
+          </div>
         </div>
-        <div className="new-expense__control">
-          <label>Amount</label>
-          <input
-            type="number"
-            value={enteredAmount}
-            onChange={amountChangeHandler}
-            min="0.01"
-            step="0.01"
-          />
-        </div>
-        <div className="new-expense__control">
-          <label>Date</label>
-          <input type="date" value={enteredDate} onChange={dateChangeHandler} />
-        </div>
-      </div>
-      <div className="new-expense__actions">
-        <button type="submit">Add Expense</button>
-      </div>
+      )}
     </form>
   );
 };
