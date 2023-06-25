@@ -8,7 +8,7 @@ const ExpenseItem = ({ expenses }) => {
       <ExpenseDate date={expenses.date} />
       <div className="expense-item__description">
         <h2>{expenses.title}</h2>
-        <div className="expense-item__price">${expenses.amount.toFixed(2)}</div>
+        <div className="expense-item__price">${expenses.amount}</div>
       </div>
     </Card>
   );
